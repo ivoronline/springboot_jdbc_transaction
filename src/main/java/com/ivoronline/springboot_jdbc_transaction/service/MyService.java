@@ -22,7 +22,7 @@ public class MyService {
     Connection connection = dataSource.getConnection();
 
     //TRANSACTION
-    try {
+    try {          //It doesn't work with try(connection) => throws java.sql.SQLRecoverableException
 
       //START TRANSACTION (Without Transaction first statement getsr inserted)
       connection.setAutoCommit(false);
@@ -37,7 +37,6 @@ public class MyService {
       connection.commit();
 
     } catch (Exception e) {
-        //ROLLBACK TRANSACTION
         connection.rollback();   //throws java.sql.SQLRecoverableException
     }
     finally {
