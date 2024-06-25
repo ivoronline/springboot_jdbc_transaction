@@ -31,7 +31,7 @@ public class MyService {
 
       //EXECUTE SQL STATEMENTS (Inserts both Records or none)
       for (int i = 1; i <= 2; i++) {
-          //if(i==2) { throw new Exception("Exception"); }
+          if(i==2) { throw new Exception("Exception"); }
           repository.save(connection, "Person " + i, 10 * i);
       }
 
