@@ -18,9 +18,9 @@ public class MyController {
   // INSERT
   //=========================================================================================================
   @ResponseBody
-  @GetMapping("/insert")
-  public String insert() throws SQLException {
-    myService.insert("Jill", 40);
+  @GetMapping("/insertRecords")
+  public String insertRecords() throws SQLException {
+    myService.insertRecords("Jill", 40);
     return "Records Inserted";
   }
 

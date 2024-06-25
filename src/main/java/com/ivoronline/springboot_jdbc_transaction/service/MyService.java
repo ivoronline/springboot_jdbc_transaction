@@ -1,5 +1,6 @@
 package com.ivoronline.springboot_jdbc_transaction.service;
 
+import com.ivoronline.springboot_jdbc_transaction.repository.MyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.sql.DataSource;
@@ -11,12 +12,13 @@ import java.sql.Statement;
 public class MyService {
 
   //PROPERTIES
-  @Autowired private DataSource dataSource;
+  @Autowired private DataSource   dataSource;
+  @Autowired private MyRepository repository;
 
   //=========================================================================================================
-  // INSERT
+  // INSERT RECORDS
   //=========================================================================================================
-  public void insert(String name, Integer age) throws SQLException {
+  public void insertRecords(String name, Integer age) throws SQLException {
 
     //GET DB CONNECTION
     Connection connection = dataSource.getConnection();
@@ -27,11 +29,11 @@ public class MyService {
       //START TRANSACTION (Without Transaction first statement getsr inserted)
       connection.setAutoCommit(false);
 
-      //INSERT RECORDS
-      String    sql = " INSERT INTO PERSON (NAME, AGE) VALUES ('"+name+"', "+age+");" +
-                      " INSERT INTO PERSON (NAME, AGE2) VALUES ('Peter'   , 60     )";
-      Statement statement = connection.createStatement();
-                statement.executeUpdate(sql);
+      //EXECUTE SQL STATEMENTS (Inserts both Records or none)
+      for (int i = 1; i <= 2; i++) {
+          //if(i==2) { throw new Exception("Exception"); }
+          repository.save(connection, "Person " + i, 10 * i);
+      }
 
       //COMMIT TRANSACTION
       connection.commit();
