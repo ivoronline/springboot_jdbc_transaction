@@ -20,7 +20,7 @@ public class MyController {
   @ResponseBody
   @GetMapping("/insertRecords")
   public String insertRecords() throws SQLException {
-    myService.insertRecords("Jill", 40);
+    myService.insertRecords();
     return "Records Inserted";
   }
 

@@ -18,7 +18,7 @@ public class MyService {
   //=========================================================================================================
   // INSERT RECORDS
   //=========================================================================================================
-  public void insertRecords(String name, Integer age) throws SQLException {
+  public void insertRecords() throws SQLException {
 
     //GET DB CONNECTION
     Connection connection = dataSource.getConnection();
